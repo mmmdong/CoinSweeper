@@ -7,8 +7,8 @@ using UniRx;
 public class GameManager : SingleTon<GameManager>
 {
     public float speed = 40f;
-    public int countPerClick = 2;
-    public float timeLimit = 5f;
+    public int countPerClick = 1;
+    public float timeLimit = 15f;
     private float dropTime;
 
     public BoolReactiveProperty isSpeedUp = new BoolReactiveProperty(false);

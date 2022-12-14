@@ -16,6 +16,7 @@ public class CoinTrigger : MonoBehaviour
             EffectManager.instance.PlayParticle(effectPos, Enums.ParticleName.DollarbillDirectional);
             UIManager.CalculateCurrency(grade + 1);
             coin.NextLevel(grade + 1);
+            TextObjPool.instance.Spawn(effectPos + Vector3.up, (int)((float)coin.coinValue * 0.2f));
         }
     }
 }

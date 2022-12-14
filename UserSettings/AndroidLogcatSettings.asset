@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R5CRA14C8KN",
         "name": "com.DefaultCompany.SweepCoin",
-        "processId": 15942,
+        "processId": 28607,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -42,6 +42,12 @@
             "deviceId": "R5CRA14C8KN",
             "name": "com.DefaultCompany.SweepCoin",
             "processId": 15942,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CRA14C8KN",
+            "name": "com.DefaultCompany.SweepCoin",
+            "processId": 28607,
             "exited": false
         },
         {

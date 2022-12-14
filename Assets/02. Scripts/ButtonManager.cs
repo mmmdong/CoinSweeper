@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class ButtonManager : MonoBehaviour
 {
+    #region SingleTon
+    public static ButtonManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+    #endregion
+
     public ButtonAddFloorController addFloorBtn;
-    //public ButtonIncomeController incomeBtn;
     public ButtonDropTermController dropTermBtn;
-    public ButtonSpeedUpController speedUpBtn;
+    public ButtonPiggySellController piggySellBtn;
 }
