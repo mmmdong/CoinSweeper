@@ -9,9 +9,12 @@ public class GameManager : SingleTon<GameManager>
     public float speed = 40f;
     public int countPerClick = 1;
     public float timeLimit = 15f;
+    public bool isSelling;
+
     private float dropTime;
 
     public BoolReactiveProperty isSpeedUp = new BoolReactiveProperty(false);
+    public IntReactiveProperty stageLev = new IntReactiveProperty(0);
 
     private void FixedUpdate()
     {

@@ -4,6 +4,8 @@ public static class Enums
     {
         None,
         DollarbillDirectional,
+        GoldCoinDirectional,
+        DollarbillFountain
     }
 
     public enum PopupName

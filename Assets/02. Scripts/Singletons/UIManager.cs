@@ -10,6 +10,16 @@ public class UIManager : SingleTon<UIManager>
 
     private readonly string[] CurrencyUnits = new string[] { "", "K", "M", "G", "T", "P", "E", "Z", "Y", };
 
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            currency.Value += 10000;
+        }
+    }
+#endif
+
     public static void CalculateCurrency(long value)
     {
         currency.Value += value;

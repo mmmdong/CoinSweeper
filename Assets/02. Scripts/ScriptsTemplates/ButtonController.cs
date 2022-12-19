@@ -12,9 +12,10 @@ namespace BaseFrame
     public class ButtonController : MonoBehaviour
     {
         [HideInInspector] public Button _btn;
-        [SerializeField] protected int _btnLev;
+        public int _btnLev;
+        public long _cost;
         protected ButtonManager _manager;
-        protected Text _costText;
+        [HideInInspector] public Text _costText;
         //public Text _cost;
         //public long _costValue;
         //[HideInInspector] public long _nextValue;

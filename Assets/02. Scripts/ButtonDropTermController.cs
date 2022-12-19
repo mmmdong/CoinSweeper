@@ -6,12 +6,26 @@ using BaseFrame;
 public class ButtonDropTermController : ButtonController
 {
     [SerializeField] private float term;
+
+    protected override void Start()
+    {
+        base.Start();
+        _cost = 20;
+        _costText.text = $"${UIManager.instance.ToCurrencyString(_cost)}";
+    }
+
     protected override void ClickAction()
     {
         base.ClickAction();
         var temp = (decimal)term;
         var tempLimit = (decimal)GameManager.instance.timeLimit;
         GameManager.instance.timeLimit = (float)(tempLimit - temp);
+
+        UIManager.CalculateCurrency(-_cost);
+        _cost = _cost + 20 + _btnLev;
+        _costText.text = $"${UIManager.instance.ToCurrencyString(_cost)}";
+
+
         if (GameManager.instance.timeLimit <= 0.5f)
         {
             _btn.interactable = false;

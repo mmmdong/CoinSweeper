@@ -17,6 +17,12 @@ public class DataManager : SingleTon<DataManager>
         //await LoadPlayerDataAsync();
     }
 
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+            SavedataAsync().Forget();
+    }
+
     public async UniTask LoadPlayerDataAsync()
     {
         _player = await LoadJsonDataAsync();
@@ -51,5 +57,7 @@ public class DataManager : SingleTon<DataManager>
     {
         public long _currency;
         public int _stage;
+        public float _timeLimit;
+        
     }
 }

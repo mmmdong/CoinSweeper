@@ -46,7 +46,7 @@ public class EffectManager : MonoBehaviour
         _particle.Play();
     }
 
-    private ParticleSystem LoadParticle(Enums.ParticleName file)
+    public ParticleSystem LoadParticle(Enums.ParticleName file)
     {
         var fileName = ChangeFileName(file);
 

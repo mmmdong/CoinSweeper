@@ -10,6 +10,7 @@ public class ButtonPiggySellController : ButtonController
 {
     public DeadZone deadZone;
     public Text text;
+    public TextMesh piggyTxtMesh, txtMeshShadow;
     public LongReactiveProperty piggyValue = new LongReactiveProperty(0);
 
     protected override async UniTask Awake()
@@ -18,11 +19,13 @@ public class ButtonPiggySellController : ButtonController
         piggyValue.Subscribe(x =>
         {
             text.text = $"${UIManager.instance.ToCurrencyString(x)}";
+            piggyTxtMesh.text = text.text;
+            txtMeshShadow.text = text.text;
             if (x == 0)
             {
                 _btn.interactable = false;
             }
-            else
+            else if (x != 0 && !GameManager.instance.isSelling)
             {
                 _btn.interactable = true;
             }
@@ -33,6 +36,7 @@ public class ButtonPiggySellController : ButtonController
     {
         base.ClickAction();
         UIManager.CalculateCurrency(piggyValue.Value);
+        EffectManager.instance.PlayParticle(deadZone.transform.position, Enums.ParticleName.DollarbillFountain);
         deadZone.InitPiggy();
         piggyValue.Value = 0;
     }
