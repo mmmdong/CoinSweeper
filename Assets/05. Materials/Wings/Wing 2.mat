@@ -16,7 +16,7 @@ Material:
   - TCP2_RIM_LIGHTING_LIGHTMASK
   - TCP2_UV_NORMALS_FULL
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
   stringTagMap:
@@ -189,7 +189,7 @@ Material:
     - __outline_gui_dummy__: 0
     m_Colors:
     - _BaseColor: {r: 0.7643734, g: 0.8396226, b: 0.83102524, a: 0.47058824}
-    - _Color: {r: 1, g: 0.77647066, b: 0.29019603, a: 0.43137255}
+    - _Color: {r: 1, g: 0.927191, b: 0, a: 0.43137255}
     - _EmissionColor: {r: 0.43527526, g: 0.43527526, b: 0.43527526, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 0.39215687}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}

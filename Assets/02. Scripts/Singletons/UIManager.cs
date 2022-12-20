@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using BaseFrame;
+using Cysharp.Threading.Tasks;
 
 public class UIManager : SingleTon<UIManager>
 {
     public static LongReactiveProperty currency = new LongReactiveProperty(0);
 
     private readonly string[] CurrencyUnits = new string[] { "", "K", "M", "G", "T", "P", "E", "Z", "Y", };
+
+    private void Start()
+    {
+        if (DataManager.instance._isData)
+        {
+            currency.Value = DataManager.instance._player._currency;
+        }
+    }
 
 #if UNITY_EDITOR
     private void Update()

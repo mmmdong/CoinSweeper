@@ -9,13 +9,16 @@ using System;
 public class DataManager : SingleTon<DataManager>
 {
     public PlayerData _player = new PlayerData();
-
     private string _jsonPath;
 
-    private async UniTask Start()
+    public bool _isData;
+
+    public override void Awake()
     {
-        //await LoadPlayerDataAsync();
+        base.Awake();
+        LoadPlayerData();
     }
+
 
     private void OnApplicationPause(bool pause)
     {
@@ -23,32 +26,49 @@ public class DataManager : SingleTon<DataManager>
             SavedataAsync().Forget();
     }
 
-    public async UniTask LoadPlayerDataAsync()
+    private void OnApplicationQuit()
     {
-        _player = await LoadJsonDataAsync();
+        SavedataAsync().Forget();
     }
 
-    private async UniTask<PlayerData> LoadJsonDataAsync()
+    public void LoadPlayerData()
     {
-        if (_jsonPath == string.Empty)
-            _jsonPath = Path.Combine(Application.persistentDataPath, "data.json");
-        var jsonData = await File.ReadAllTextAsync(_jsonPath);
-        var data = JsonUtility.FromJson<PlayerData>(jsonData);
-        return data;
+        _player = LoadJsonData();
+    }
+
+    private PlayerData LoadJsonData()
+    {
+        if (!File.Exists(Path.Combine(Application.dataPath, "data.json")))
+        {
+            _isData = false;
+            return new PlayerData();
+        }
+        else
+        {
+            _jsonPath = Path.Combine(Application.dataPath, "data.json");
+
+            var jsonData = File.ReadAllText(_jsonPath);
+
+            var data = JsonUtility.FromJson<PlayerData>(jsonData);
+            _isData = true;
+            return data;
+        }
     }
 
     public async UniTask SavedataAsync()
     {
+        _player._currency = UIManager.currency.Value;
+
         var jsonData = JsonUtility.ToJson(_player, true);
-        if (_jsonPath == string.Empty)
-            _jsonPath = Path.Combine(Application.persistentDataPath, "data.json");
+        if (_jsonPath == null)
+            _jsonPath = Path.Combine(Application.dataPath, "data.json");
         await File.WriteAllTextAsync(_jsonPath, jsonData);
     }
 
     private void DeleteData()
     {
-        if (_jsonPath == string.Empty)
-            _jsonPath = Path.Combine(Application.persistentDataPath, "data.json");
+        if (_jsonPath == null)
+            _jsonPath = Path.Combine(Application.dataPath, "data.json");
         File.Delete(_jsonPath);
     }
 
@@ -56,8 +76,11 @@ public class DataManager : SingleTon<DataManager>
     public class PlayerData
     {
         public long _currency;
-        public int _stage;
-        public float _timeLimit;
-        
+        public int _stage = 1;
+
+        public long _addFloorCost;
+        public long _sellCost;
+        public long _spawnTermCost;
+        public int _spawnTermLev;
     }
 }

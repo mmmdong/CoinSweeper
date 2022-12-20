@@ -27,7 +27,7 @@ namespace BaseFrame
             }
         }
 
-        public void Awake()
+        virtual public void Awake()
         {
             Application.targetFrameRate = 60;
             DontDestroyOnLoad(gameObject);

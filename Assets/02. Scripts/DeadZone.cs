@@ -24,12 +24,12 @@ public class DeadZone : MonoBehaviour
             //prevScale = piggy.localScale;
             //piggy.localScale = new Vector3(prevScale.x + 0.01f * coin.coinValue, prevScale.y + 0.01f * coin.coinValue, prevScale.z + 0.01f * coin.coinValue);
 
-            if (piggy.localScale.x >= limitSize[GameManager.instance.stageLev.Value] && !GameManager.instance.isSelling)
+            if (piggy.localScale.x >= limitSize[ButtonManager.instance.addFloorBtn._btnLev - 1] && !GameManager.instance.isSelling)
             {
-                piggy.transform.localScale = Vector3.one * limitSize[ButtonManager.instance.addFloorBtn._btnLev];
+                piggy.transform.localScale = Vector3.one * limitSize[ButtonManager.instance.addFloorBtn._btnLev - 1];
                 PiggyEffect();
             }
-            else if (piggy.localScale.x < limitSize[GameManager.instance.stageLev.Value] && !GameManager.instance.isSelling)
+            else if (piggy.localScale.x < limitSize[ButtonManager.instance.addFloorBtn._btnLev - 1] && !GameManager.instance.isSelling)
             {
                 piggy.DOScale(0.025f, 0f).SetRelative();
             }

@@ -6,7 +6,7 @@ using UniRx;
 
 public class GameManager : SingleTon<GameManager>
 {
-    public float speed = 40f;
+    public float speed = 20f;
     public int countPerClick = 1;
     public float timeLimit = 15f;
     public bool isSelling;
@@ -14,7 +14,6 @@ public class GameManager : SingleTon<GameManager>
     private float dropTime;
 
     public BoolReactiveProperty isSpeedUp = new BoolReactiveProperty(false);
-    public IntReactiveProperty stageLev = new IntReactiveProperty(0);
 
     private void FixedUpdate()
     {
@@ -27,10 +26,10 @@ public class GameManager : SingleTon<GameManager>
         }
 
         speed -= 40f * Time.deltaTime;
-        if(speed <= 40f)
+        if (speed <= 20f)
         {
-            speed = 40f;
-            isSpeedUp.Value = false;    
+            speed = 20f;
+            isSpeedUp.Value = false;
         }
     }
 }
