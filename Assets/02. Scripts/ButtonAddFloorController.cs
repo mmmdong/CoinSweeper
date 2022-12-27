@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BaseFrame;
 using Cysharp.Threading.Tasks;
+using MondayOFF;
 
 public class ButtonAddFloorController : ButtonController
 {
@@ -58,10 +59,12 @@ public class ButtonAddFloorController : ButtonController
     protected override void ClickAction()
     {
         base.ClickAction();
+        EventTracker.ClearStage(_floorCount);
         _floorCount++;
+        EventTracker.TryStage(_floorCount);
 
         InstantiateFloor(_floorCount - 1, true);
-
+        
         var payCost = _cost;
         _cost = (long)((100 * (_btnLev)) * 5 * Mathf.Pow(_btnLev - 1, 2f));
         _costText.text = $"${UIManager.instance.ToCurrencyString(_cost)}";

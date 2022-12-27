@@ -9,20 +9,30 @@ public class DeadZone : MonoBehaviour
     private Tween tw;
     private ObjectController coin;
     private Vector3 prevScale;
-    private float[] limitSize = new float[] { 2f, 2.5f, 3f, 3.5f, 4f, 4.5f, 5f, 5.5f, 6f};
+    private float[] limitSize = new float[] { 2f, 2.5f, 3f, 3.5f, 4f, 4.5f, 5f, 5.5f, 6f };
 
     private int coinCount;
+
+    private void Start()
+    {
+        if (DataManager.instance._isData && DataManager.instance._player._coinCount != 0)
+        {
+            coinCount = DataManager.instance._player._coinCount;
+            piggy.localScale = new Vector3(1f + 0.025f * coinCount, 1f + 0.025f * coinCount, 1f + 0.025f * coinCount);
+            if (piggy.localScale.x >= limitSize[DataManager.instance._player._stage - 1])
+            {
+                piggy.transform.localScale = Vector3.one * limitSize[DataManager.instance._player._stage - 1];
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Obj"))
         {
             coin = other.GetComponent<ObjectController>();
-            //UIManager.CalculateCurrency(coin.coinValue);
 
             ButtonManager.instance.piggySellBtn.piggyValue.Value += coin.coinValue;
-
-            //prevScale = piggy.localScale;
-            //piggy.localScale = new Vector3(prevScale.x + 0.01f * coin.coinValue, prevScale.y + 0.01f * coin.coinValue, prevScale.z + 0.01f * coin.coinValue);
 
             if (piggy.localScale.x >= limitSize[ButtonManager.instance.addFloorBtn._btnLev - 1] && !GameManager.instance.isSelling)
             {
@@ -36,6 +46,7 @@ public class DeadZone : MonoBehaviour
 
             EffectManager.instance.PlayParticle(transform.position, Enums.ParticleName.GoldCoinDirectional);
             coinCount++;
+            DataManager.instance._player._coinCount = coinCount;
             DestroyCoin(coin);
         }
     }
@@ -52,9 +63,12 @@ public class DeadZone : MonoBehaviour
         StartCoroutine(CoInitPiggy());
     }
 
-    private IEnumerator CoInitPiggy(){
+    private IEnumerator CoInitPiggy()
+    {
         coinCount = 0;
+        DataManager.instance._player._coinCount = coinCount;
         GameManager.instance.isSelling = true;
+        ButtonManager.instance.piggySellBtn.canvas.alpha = 0f;
         ButtonManager.instance.piggySellBtn._btn.interactable = false;
         var duration = EffectManager.instance.LoadParticle(Enums.ParticleName.DollarbillFountain).main.duration;
         piggy.DOScale(Vector3.one, duration);
@@ -64,7 +78,10 @@ public class DeadZone : MonoBehaviour
         piggy.DOScale(value, 0.5f).SetRelative();
         GameManager.instance.isSelling = false;
         if (ButtonManager.instance.piggySellBtn.piggyValue.Value > 0)
+        {
+            ButtonManager.instance.piggySellBtn.canvas.alpha = 1f;
             ButtonManager.instance.piggySellBtn._btn.interactable = true;
+        }
     }
 
     private void PiggyEffect()

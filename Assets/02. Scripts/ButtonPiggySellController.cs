@@ -11,22 +11,29 @@ public class ButtonPiggySellController : ButtonController
     public DeadZone deadZone;
     public Text text;
     public TextMesh piggyTxtMesh, txtMeshShadow;
-    public LongReactiveProperty piggyValue = new LongReactiveProperty(0);
+    public LongReactiveProperty piggyValue;
+    public CanvasGroup canvas;
 
-    protected override async UniTask Awake()
+    protected override void Start()
     {
-        await base.Awake();
+        base.Start();
+
+        piggyValue = new LongReactiveProperty(DataManager.instance._player._sellCost);
+
         piggyValue.Subscribe(x =>
         {
+            DataManager.instance._player._sellCost = x;
             text.text = $"${UIManager.instance.ToCurrencyString(x)}";
             piggyTxtMesh.text = text.text;
             txtMeshShadow.text = text.text;
             if (x == 0)
             {
+                canvas.alpha = 0f;
                 _btn.interactable = false;
             }
             else if (x != 0 && !GameManager.instance.isSelling)
             {
+                canvas.alpha = 1f;
                 _btn.interactable = true;
             }
         });

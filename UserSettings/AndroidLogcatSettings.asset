@@ -2,8 +2,8 @@
     "m_SelectedDeviceId": "R5CRA14C8KN",
     "m_SelectedPackage": {
         "deviceId": "R5CRA14C8KN",
-        "name": "com.DefaultCompany.SweepCoin",
-        "processId": 28607,
+        "name": "com.mondayoff.cointower",
+        "processId": 22263,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -11,43 +11,43 @@
         {
             "deviceId": "R5CRA14C8KN",
             "name": "com.sec.android.app.launcher",
-            "processId": 3171,
+            "processId": 3047,
             "exited": false
         },
         {
             "deviceId": "R5CRA14C8KN",
-            "name": "com.DefaultCompany.SweepCoin",
-            "processId": 22399,
+            "name": "com.mondayoff.cointower",
+            "processId": 2646,
             "exited": true
         },
         {
             "deviceId": "R5CRA14C8KN",
-            "name": "com.DefaultCompany.SweepCoin",
-            "processId": 28515,
+            "name": "com.mondayoff.cointower",
+            "processId": 6369,
             "exited": true
         },
         {
             "deviceId": "R5CRA14C8KN",
-            "name": "com.DefaultCompany.SweepCoin",
-            "processId": 25013,
+            "name": "com.mondayoff.cointower",
+            "processId": 9446,
             "exited": true
         },
         {
             "deviceId": "R5CRA14C8KN",
-            "name": "com.DefaultCompany.SweepCoin",
-            "processId": 7328,
+            "name": "com.mondayoff.cointower",
+            "processId": 31026,
             "exited": true
         },
         {
             "deviceId": "R5CRA14C8KN",
-            "name": "com.DefaultCompany.SweepCoin",
-            "processId": 15942,
+            "name": "com.mondayoff.cointower",
+            "processId": 13931,
             "exited": false
         },
         {
             "deviceId": "R5CRA14C8KN",
-            "name": "com.DefaultCompany.SweepCoin",
-            "processId": 28607,
+            "name": "com.mondayoff.cointower",
+            "processId": 22263,
             "exited": false
         },
         {
@@ -72,6 +72,30 @@
             "deviceId": "R3CRC0NWQET",
             "name": "com.DefaultCompany.SweepCoin",
             "processId": 26457,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CRC0NWQET",
+            "name": "com.DefaultCompany.SweepCoin",
+            "processId": 10091,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CRC0NWQET",
+            "name": "com.DefaultCompany.SweepCoin",
+            "processId": 14814,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CRC0NWQET",
+            "name": "com.DefaultCompany.SweepCoin",
+            "processId": 16043,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CRC0NWQET",
+            "name": "com.mondayoff.cointower",
+            "processId": 19288,
             "exited": false
         }
     ],

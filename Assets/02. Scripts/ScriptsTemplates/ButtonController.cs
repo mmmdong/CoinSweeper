@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-/* using MoreMountains.NiceVibrations; */
+using MoreMountains.NiceVibrations;
 
 
 namespace BaseFrame
@@ -45,13 +45,13 @@ namespace BaseFrame
         {
             //pass
             _btnLev++;
-            /* Haptic(HapticTypes.MediumImpact); */
+            Haptic(HapticTypes.MediumImpact);
         }
-        /* 
-            private void Haptic(HapticTypes type)
-            {
-                MMVibrationManager.Haptic(type);
-            } */
+
+        private void Haptic(HapticTypes type)
+        {
+            MMVibrationManager.Haptic(type);
+        }
     }
 }
 

@@ -5,31 +5,36 @@ using Cysharp.Threading.Tasks;
 using System.IO;
 using BaseFrame;
 using System;
+using MondayOFF;
 
-public class DataManager : SingleTon<DataManager>
+public class DataManager : MonoBehaviour
 {
+    public static DataManager instance;
+
     public PlayerData _player = new PlayerData();
     private string _jsonPath;
 
     public bool _isData;
 
-    public override void Awake()
+    private void Awake()
     {
-        base.Awake();
+        if (instance == null) instance = this;
         LoadPlayerData();
     }
 
-
-    private void OnApplicationPause(bool pause)
-    {
-        if (pause)
-            SavedataAsync().Forget();
-    }
-
+#if UNITY_EDITOR
     private void OnApplicationQuit()
     {
-        SavedataAsync().Forget();
+        Savedata();
     }
+#else
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+            Savedata();
+    }
+#endif
+
 
     public void LoadPlayerData()
     {
@@ -38,37 +43,45 @@ public class DataManager : SingleTon<DataManager>
 
     private PlayerData LoadJsonData()
     {
-        if (!File.Exists(Path.Combine(Application.dataPath, "data.json")))
+        if (!File.Exists(Path.Combine(Application.persistentDataPath, "data.json")))
         {
             _isData = false;
+            EventTracker.ClearStage(0);
+            EventTracker.TryStage(1);
+
+            Debug.Log("----------------------------------------------------Empty----------------------------------------------------");
+
             return new PlayerData();
         }
         else
         {
-            _jsonPath = Path.Combine(Application.dataPath, "data.json");
+            _jsonPath = Path.Combine(Application.persistentDataPath, "data.json");
 
             var jsonData = File.ReadAllText(_jsonPath);
 
             var data = JsonUtility.FromJson<PlayerData>(jsonData);
             _isData = true;
+            Debug.Log("----------------------------------------------------Load----------------------------------------------------");
             return data;
         }
     }
 
-    public async UniTask SavedataAsync()
+    public void Savedata()
     {
         _player._currency = UIManager.currency.Value;
 
         var jsonData = JsonUtility.ToJson(_player, true);
         if (_jsonPath == null)
-            _jsonPath = Path.Combine(Application.dataPath, "data.json");
-        await File.WriteAllTextAsync(_jsonPath, jsonData);
+            _jsonPath = Path.Combine(Application.persistentDataPath, "data.json");
+        File.WriteAllText(_jsonPath, jsonData);
+        Debug.Log("----------------------------------------------------Save----------------------------------------------------");
     }
 
+    
     private void DeleteData()
     {
         if (_jsonPath == null)
-            _jsonPath = Path.Combine(Application.dataPath, "data.json");
+            _jsonPath = Path.Combine(Application.persistentDataPath, "data.json");
         File.Delete(_jsonPath);
     }
 
@@ -80,6 +93,7 @@ public class DataManager : SingleTon<DataManager>
 
         public long _addFloorCost;
         public long _sellCost;
+        public int _coinCount;
         public long _spawnTermCost;
         public int _spawnTermLev;
     }
